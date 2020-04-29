@@ -15,6 +15,46 @@ function endsWith($haystack, $needle) {
     return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
 }
 
+function getGenericName($folder, $sprite, $dir, $frame, $generar){
+	// if(!file_exists("$folderName/$spriteName"."_$dir")){
+    //     mkdir("$folderName/$spriteName"."_$dir");
+    // }
+    // imagepng($sprite, "$folderName/$spriteName"."_$dir/$frameNum.png");
+    $name = "$folder/$sprite";
+    if($generar == true){
+        switch($dir){
+            case 0:
+                $name .= "_down/$sprite"."_down_$frame.png";
+                break;
+            case 1:
+                $name .= "_up/$sprite"."_up_$frame.png";
+                break;
+            case 2:
+                $name .= "_right/$sprite"."_right_$frame.png";
+                break;
+            case 3:
+                $name .= "_left/$sprite"."_left_$frame.png";
+                break;
+        }
+    }else{
+        switch($dir){
+            case 0:
+                $name .= "_down";
+                break;
+            case 1:
+                $name .= "_up";
+                break;
+            case 2:
+                $name .= "_right";
+                break;
+            case 3:
+                $name .= "_left";
+                break;
+        }
+    }
+    return $name;
+}
+
 class PNGMetadataExtractor {
     private static $pngSig;
 
@@ -621,11 +661,12 @@ foreach($dmiFiles as $i => $inFile){
 					$posY = floor(($spriteNumber + ($dirs * $frameNum) + $dir) / $spritesX);
 					//print "<br>posX = $posX; posY = $posY<br>";
 					imagecopy($sprite, $image, 0, 0, $posX * $width, $posY * $height, $width, $height);
-					if(!file_exists("$folderName/$spriteName"."_$dir")){
-						mkdir("$folderName/$spriteName"."_$dir");
-					}
-					imagepng($sprite, "$folderName/$spriteName"."_$dir/$frameNum.png");
-					print "<img src='$folderName/$spriteName"."_$dir/$frameNum.png' alt='$spriteName'>";
+					if(!file_exists(getGenericName($folderName, $spriteName, $dir, 0, false))){
+						mkdir(getGenericName($folderName, $spriteName, $dir, 0, false));
+                    }
+                    $genericName = getGenericName($folderName, $spriteName, $dir, $frameNum, true);
+					imagepng($sprite, $genericName);
+					print "<img src='$genericName' alt='$genericName'>";
 					$gifFrameList[] = $sprite;
 				}
 				

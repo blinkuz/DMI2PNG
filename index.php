@@ -24,31 +24,31 @@ function getGenericName($folder, $sprite, $dir, $frame, $generar){
     if($generar == true){
         switch($dir){
             case 0:
-                $name .= "_down/$sprite"."_down_$frame.png";
+                $name .= "_abajo/$sprite"."_abajo_$frame.png";
                 break;
             case 1:
-                $name .= "_up/$sprite"."_up_$frame.png";
+                $name .= "_arriba/$sprite"."_arriba_$frame.png";
                 break;
             case 2:
-                $name .= "_right/$sprite"."_right_$frame.png";
+                $name .= "_derecha/$sprite"."_derecha_$frame.png";
                 break;
             case 3:
-                $name .= "_left/$sprite"."_left_$frame.png";
+                $name .= "_izquierda/$sprite"."_izquierda_$frame.png";
                 break;
         }
     }else{
         switch($dir){
             case 0:
-                $name .= "_down";
+                $name .= "_abajo";
                 break;
             case 1:
-                $name .= "_up";
+                $name .= "_arriba";
                 break;
             case 2:
-                $name .= "_right";
+                $name .= "_derecha";
                 break;
             case 3:
-                $name .= "_left";
+                $name .= "_izquierda";
                 break;
         }
     }
